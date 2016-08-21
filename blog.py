@@ -10,6 +10,8 @@ leadins = """Join us this month for a
 	The First Friday 2600 meeting will be a
 	2600 this month is a
 	Get ready for a
+	Wow. Big month. It'll be a
+	Rochester 2600 is going to devote some time to be a
 	For thos interested, the meeting this month is a"""
 
 descriptions = """trist into
@@ -94,13 +96,53 @@ verbs = """while we take a look at
 
 # List of OBJECTs selected for profound sententiousness.
 
-objects = """ problems of phonemic and morphological analysis.
-        a corpus of utterance tokens upon which conformity has been defined by the paired utterance test.
-        the traditional practice of grammarians.
-        the levels of acceptability from fairly high (e.g. (99a)) to virtual gibberish (e.g. (98d)).
-        a stipulation to place the constructions into these various categories.
-        a descriptive fact.
+objects = """ problems of 
+        a corpus of utterance tokens between
+        a sumo wrestle match between
+        a size comparison of
+	the differences between
+	documented gender barriers of
+	an oversimplified comparative anlaysis of
+	the effects ridilin has on
+	which melts faster between
+	implications of nostril hair on 
         a parasitic gap construction."""
+
+pobj = """ Dan Kaminski
+	Jason Ross
+	a pound of butter
+	right-wing squirrels
+	power hungry dwarves
+	Shmoocon
+	DEFCON
+	nose hair
+	eye brows
+	Denny's Moons Of My Hammy
+	a depressed fourth grader
+	Thomas
+	Joe
+	Bill
+	AntiTree
+	Andrew
+	the cast of Glee
+	that weird guy that comes in sometimes
+	cryptography
+	T.O.R.
+	two fluffy pillows
+	MongoDB
+	JSON
+	python
+	go-lang
+	Java
+	NodeJS
+	Bitcoin
+	Ethereium
+	ZCash
+	balls"""
+
+bobj = """ and
+	and"""
+
 
 presentations = """Presentations this months include:
 	This will be done via presentations below:
@@ -119,7 +161,7 @@ from time import sleep
 
 def chomsky(times=1, line_length=72):
     parts = []
-    for part in (leadins, descriptions, subjects, verbs, objects, presentations):
+    for part in (leadins, descriptions, subjects, verbs, objects, pobj, bobj, pobj,""".""", presentations):
         phraselist = map(str.strip, part.splitlines())
         random.shuffle(phraselist)
         parts.append(phraselist)
