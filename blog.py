@@ -259,11 +259,15 @@ def chomsky(times=1, line_length=72):
 meeting_date = raw_input("What's the date of the next meeting? (M/D/YYYY)")
 edition = raw_input("What's the edition? (e.g. Trump, Black Santa)")
 image = raw_input("What's the name alone of the image? (trump_again, subjectname. Do not include png or anything else. Image must be named 2600_subject.png")
-print("Title: Meeting %s %s Edition" % ( meeting_date, edition))
-print("Date: %s 0:00" % datetime.datetime.today().strftime('%Y-%m-%d'))
-print("""category: meetings
-author: antitree""")
-print("sidebarimage: images/2600_%s.png" % image)
+print("+"*3)
+print("title =  \"Meeting %s %s Edition\"" % ( meeting_date, edition))
+print("date = \"%s\"" % datetime.datetime.today().strftime('%Y-%m-%d'))
+print("type = \"post\"")
+print("author = \"antitree\"")
+print("+"*3)
+print("")
+print('[![2600](/images/2600_%s.png)](images/2600_%s.png)')
+print("")
 print(chomsky())
 
 
