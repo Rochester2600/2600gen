@@ -302,6 +302,6 @@ if (ff - datetime.date.today()).days < 0:
 ff = ff.strftime('%m/%d/%Y')
 
 meeting_date = raw_input("What's the date of the next meeting? (%s)" % ff) or ff
-edition = raw_input("What's the edition? (e.g. Trump, Black Santa)")
-image = raw_input("What's the name alone of the image? (trump_again, subjectname. Do not include png or anything else. Image must be named 2600_subject.png")
+edition = raw_input("What's the edition? (e.g. Trump, Black Santa): ")
+image = raw_input("What's the name alone of the image? (%s): " % edition.lower()) or edition.lower()
 generate_output(meeting_date, edition, image)

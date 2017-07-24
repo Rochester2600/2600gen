@@ -1,14 +1,14 @@
 import Image
-import sys
+import sys, os
 
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
   print("Usage: ./image.py image.png title")
+  sys.exit()
 
 # Setimage title
 title = sys.argv[2]
 
-
-
+assert os.path.exists(sys.argv[1])
 background = Image.open("2600.png")
 overlay = Image.open(sys.argv[1])
 size = 400,400
