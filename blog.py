@@ -1,9 +1,42 @@
 # Generate the monthly 2600 web page
 import datetime
+import calendar
+import sys
+import os
 
 PRESENTATIONS = './presentations.txt'
 with open(PRESENTATIONS) as fp:
-	preslist = "\n\n" + fp.read()
+    preslist = "\n\n" + fp.read()
+
+if len(sys.argv) > 1:
+    OUTPUT = sys.argv[1]
+    assert os.path.isdir(OUTPUT)
+else:
+    OUTPUT = None
+
+
+
+
+def generate_output(meeting_date, edition, image):
+  global OUTPUT
+  text = []
+  text.append("+"*3)
+  text.append("title =  \"Meeting %s %s Edition\"" % ( meeting_date, edition))
+  text.append("date = \"%s\"" % datetime.datetime.today().strftime('%Y-%m-%d'))
+  text.append("type = \"post\"")
+  text.append("author = \"antitree\"")
+  text.append("+"*3)
+  text.append("")
+  text.append('[![2600](/images/2600_%s.png)](images/2600_%s.png)' % (image, image))
+  text.append("")
+  text.append(chomsky())
+  if OUTPUT:
+	  f = open("%s/%s.md" % (OUTPUT, datetime.datetime.today().strftime('%m-%d-%Y')), 'w')
+	  f.writelines("%s\n" % t for t in text)
+  else:
+	  for line in text:
+		  print(line)
+
 
 # List of LEADINs to buy time.
 leadins = """Join us this month for a
@@ -122,7 +155,7 @@ verbs = """while we take a look at
 
 # List of OBJECTs selected for profound sententiousness.
 
-objects = """ problems of 
+objects = """ problems of
         a corpus of utterance tokens between
         a sumo wrestle match between
         a size comparison of
@@ -256,18 +289,19 @@ def chomsky(times=1, line_length=72):
     output = chain(*islice(izip(*parts), 0, times))   # !3
     return textwrap.fill(' '.join(output), line_length) + preslist  # !3
 
-meeting_date = raw_input("What's the date of the next meeting? (M/D/YYYY)")
+def first_friday_finder(year, month):
+	#find next first friday
+    c = calendar.Calendar(firstweekday=calendar.SUNDAY)
+    monthcal = c.monthdatescalendar(year, month)
+    return [day for week in monthcal for day in week if day.weekday() == calendar.FRIDAY and day.month == month][0]
+
+today = datetime.datetime.today()
+ff = first_friday_finder(today.year, today.month)
+if (ff - datetime.date.today()).days < 0:
+    ff = first_friday_finder(today.year, today.month + 1)
+ff = ff.strftime('%m/%d/%Y')
+
+meeting_date = raw_input("What's the date of the next meeting? (%s)" % ff) or ff
 edition = raw_input("What's the edition? (e.g. Trump, Black Santa)")
 image = raw_input("What's the name alone of the image? (trump_again, subjectname. Do not include png or anything else. Image must be named 2600_subject.png")
-print("+"*3)
-print("title =  \"Meeting %s %s Edition\"" % ( meeting_date, edition))
-print("date = \"%s\"" % datetime.datetime.today().strftime('%Y-%m-%d'))
-print("type = \"post\"")
-print("author = \"antitree\"")
-print("+"*3)
-print("")
-print('[![2600](/images/2600_%s.png)](images/2600_%s.png)')
-print("")
-print(chomsky())
-
-
+generate_output(meeting_date, edition, image)
