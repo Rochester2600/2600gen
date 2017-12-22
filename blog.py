@@ -298,7 +298,11 @@ def first_friday_finder(year, month):
 today = datetime.datetime.today()
 ff = first_friday_finder(today.year, today.month)
 if (ff - datetime.date.today()).days < 0:
-    ff = first_friday_finder(today.year, today.month + 1)
+    if today.month == 12:
+        nextmonth = 1
+    else: 
+        nextmonth = today.month + 1
+    ff = first_friday_finder(today.year, nextmonth)
 ff = ff.strftime('%m/%d/%Y')
 
 meeting_date = raw_input("What's the date of the next meeting? (%s)" % ff) or ff
