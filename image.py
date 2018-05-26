@@ -1,4 +1,4 @@
-import Image
+from PIL import Image
 import sys, os
 
 if len(sys.argv) < 3:
@@ -15,7 +15,7 @@ size = 400,400
 overlay.thumbnail(size)
 bg_w, bg_h = background.size
 o_w, o_h = overlay.size
-offset = ((bg_w - o_w) / 2, (bg_h - o_h) / 2)
+offset = ((bg_w - o_w) // 2, (bg_h - o_h) // 2)
 
 
 
@@ -25,7 +25,8 @@ offset = ((bg_w - o_w) / 2, (bg_h - o_h) / 2)
 #new_img = Image.blend(background, overlay, 0.5)a
 x = 0
 y = 0
-if True: 
+if True:
+  print("%s " % overlay)
   background.paste(overlay, offset, overlay.convert('RGBA'))
   background.save("2600_%s.png" % title, "PNG")
   #loc = raw_input("Change coordinates?[y/n]")
