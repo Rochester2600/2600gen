@@ -305,13 +305,12 @@ def generate_output(meeting_date, edition, image, location=None, location_link=N
   text.append("date = \"%s\"" % datetime.datetime.today().strftime('%Y-%m-%d'))
   text.append("type = \"post\"")
   text.append("author = \"antitree\"")
+  text.append("image = \"/images/2600_%s.png\"" % image)
   if facebook:
       text.append("facebook = \"%s\"" % facebook)
   if meetup:
       text.append("meetup = \"%s\"" % meetup)
   text.append("+"*3)
-  text.append("")
-  text.append('[![2600](/images/2600_%s.png)](/images/2600_%s.png)' % (image, image))
   text.append("")
   if location:  
     if location_link:
@@ -328,7 +327,8 @@ def generate_output(meeting_date, edition, image, location=None, location_link=N
         copyfile('./2600_%s.png' % image, OUTPUT_IMAGES)
     except:
         print("Image not found. make sure you generate on first.")
-        sys.exit() ## TODO enable
+        print("Assuming you just copied it.")
+        #sys.exit() ## TODO enable
 
 
     write_check = input("This is about to overwrite the file at %s. That ok? (Y/n)" % OUTPUT_CONTENT) or "y"
