@@ -9,6 +9,8 @@ PRESENTATIONS = './presentations.txt'
 DEFAULT_OUTPUT_DIRECTORY = '../rochester2600-hugo'
 DEFAULT_MEETUP_GROUP = 'https://www.meetup.com/Interlock-Rochester-Hackerspace/'
 DEFAULT_FACEBOOK_GROUP = 'https://www.facebook.com/groups/rochester2600/events/'
+DEFAULT_LOCATION = 'Global Cybersecurity Institute at RIT'
+DEFAULT_LOCATION_LINK = 'https://www.google.com/maps/place/RIT+Global+Cybersecurity+Institute/@43.0837456,-77.6831996,17z/data=!4m5!3m4!1s0x89d14d2c49d8c867:0x334b947e3eed5a20!8m2!3d43.0837456!4d-77.6810109'
 with open(PRESENTATIONS) as fp:
     preslist = "\n\n" + fp.read()
 
@@ -69,7 +71,6 @@ descriptions = """trist into
 
 # List of SUBJECTs chosen for maximum professorial macho.
 subjects = """docker
-	Jason's dark secrets
         Mormonism
 	information security
 	humanity
@@ -83,13 +84,16 @@ subjects = """docker
 	scotch and sadness
 	unholy matrimonies
 	tired llamas
-	why Thomas is here
         why Jason isn't here
         posers
         scenesters
         pentesting monkeys
         emotional intelligence
-    eBPF    
+    eBPF 
+    NFTs
+    cryptozoology
+    symantec antivirus
+    crypto-bros
 	"""
 
 subjects = """our deepest desires
@@ -154,7 +158,8 @@ verbs = """while we take a look at
 	much as our presenters share their knoweldge about
 	as we appologize for
         while we listen to
-	while we sip our drinks and look at"""
+	while we sip our drinks and look at
+    while we make sure not to make eye contact with"""
 
 
 # List of OBJECTs selected for profound sententiousness.
@@ -331,11 +336,11 @@ def generate_output(meeting_date, edition, image, location=None, location_link=N
         #sys.exit() ## TODO enable
 
 
-    write_check = input("This is about to overwrite the file at %s. That ok? (Y/n)" % OUTPUT_CONTENT) or "y"
-    if write_check.lower() == "y":
-        f = open("%s/%s.md" % (OUTPUT_CONTENT, datetime.datetime.today().strftime('%Y-%m-%d')), 'w')
-        f.writelines("%s\n" % t for t in text)
-    else: print("Write file skipped")
+    #write_check = input("This is about to overwrite the file at %s. That ok? (Y/n)" % OUTPUT_CONTENT) or "y"
+    #if write_check.lower() == "y":
+    #    f = open("%s/%s.md" % (OUTPUT_CONTENT, datetime.datetime.today().strftime('%Y-%m-%d')), 'w')
+    #    f.writelines("%s\n" % t for t in text)
+    #else: print("Write file skipped")
 
   for line in text:
         print(line)
@@ -362,11 +367,11 @@ if (ff - datetime.date.today()).days < 0:
 ff = ff.strftime('%m/%d/%Y')
 
 meeting_date = input("What's the date of the next meeting? (%s)" % ff) or ff
-location = input("What is the name of the meeting location? ")
-location_link = input("Link to map of meeting location: ")
+location = input("What is the name of the meeting location? (%s):" % DEFAULT_LOCATION) or DEFAULT_LOCATION
+location_link = input("Link to map of meeting location: (Use RIT Cyber Cyber Map)") or DEFAULT_LOCATION_LINK
 if not is_url(location_link): 
     print("Proper URL not provided. What are you even doing?")
-    sys.exit()
+    #sys.exit()
 park_bool = input("Extra parking instructions? (y/N)") or "n"
 if park_bool.lower() == "y":
         parking_instructions = input("What are the instructions for parking? ")

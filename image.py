@@ -11,7 +11,7 @@ title = sys.argv[2]
 assert os.path.exists(sys.argv[1])
 background = Image.open("2600.png")
 overlay = Image.open(sys.argv[1])
-size = 400,400
+size = 495,495
 overlay.thumbnail(size)
 bg_w, bg_h = background.size
 o_w, o_h = overlay.size
